@@ -23,6 +23,7 @@ cd ExSample && pip install -e .
 ```
 
 ## Experiments
+![bicycle@Archie](https://s2.loli.net/2024/04/15/fj5uzFbMik3CacB.png)
 > Currently, this repository **only** provides routines for **offline query** using `.csv` annotation files.
 > If you want to query online with your object detection NN and tracking algorithms, please inherit class `BaseQuery` in `ExSample/query.py` and implement related functions.
 
@@ -31,24 +32,54 @@ This repository borrowed the video clips and `.csv` annotation files from [stanf
 
 1. The files can be downloaded from the [Google Drive](https://drive.google.com/drive/folders/1riFVI6QZGf8X6lyFphyRighAYMDTAH4Z?usp=sharing).
 
-2. Modify `video_fp` and `csv_fp` in the `ExSample/examples/archie.py`.
+2. Modify `-v` and `-c` in the `ExSample/examples/archie.sh`.
 
-### Run Query
+### Run Routine
+This routine will query `bicycle` objects in the Archie dataset with `chunks=16` and `limit=3000`.
 ```bash
-time python ExSample/examples/archie.py
+sh ExSample/examples/archie.sh
 ```
 The script will output the objects, frame indices and other metrics.
 ```bash
-frame_id:
-[0] 408432
+frame-id:
+[0] 731072 [1] 439370 [2] 417376 ...
 
 objects:
-[0] Object(label=car bbox=Bbox(2306, 1124, 2709, 1374) conf=0.99 track_id=150174)
-[1] Object(label=car bbox=Bbox(3648, 1574, 3836, 1816) conf=0.97 track_id=150211)
-[2] Object(label=car bbox=Bbox(3203, 811, 3530, 1015) conf=0.95 track_id=150205)
+[0] Object(label=bicycle bbox=Bbox(2280, 1865, 2538, 2000) conf=1.00 track_id=266371)
+[1] Object(label=bicycle bbox=Bbox(2361, 1873, 2596, 2010) conf=0.94 track_id=160599)
+[2] Object(label=bicycle bbox=Bbox(2020, 1958, 2287, 2105) conf=0.99 track_id=152919)
+...
 
-Archie
-----------  --
-nb_find      3
-nb_samples   2
+ExSample Offline Query
+------------------------  --
+nb_find                    3000
+nb_samples                 8673
+```
+
+### Custom Query
+Check the following arguments to run a custom query on your dataset:
+```bash
+usage: offline_query.py [-h] --video-path VIDEO_PATH --csv-path CSV_PATH
+                        --query-objects QUERY_OBJECTS [QUERY_OBJECTS ...]
+                        [--nb-chunks NB_CHUNKS] --limit LIMIT
+                        [--union-find UNION_FIND]
+
+ExSample Offline Query
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --video-path VIDEO_PATH, -v VIDEO_PATH
+                        path of the video
+  --csv-path CSV_PATH, -c CSV_PATH
+                        path of the csv file
+  --query-objects QUERY_OBJECTS [QUERY_OBJECTS ...], -o QUERY_OBJECTS [QUERY_OBJECTS ...]
+                        object labels for query
+  --nb-chunks NB_CHUNKS, -n NB_CHUNKS
+                        number of the chunks, default is 16
+  --limit LIMIT, -l LIMIT
+                        number of the samples to find
+  --union-find UNION_FIND
+                        whether to use union-find for discrimination, default
+                        is True
+
 ```

@@ -41,7 +41,7 @@ def show_result(data, header):
     for k, v in data.items():
         if k == 'objects':
             print(f'{k}:' + '\n' + '\n'.join([f'[{i}] '+ str(x) for i, x in enumerate(v)]) + '\n')
-        elif k == 'frame_id':
+        elif k == 'frame-id':
             print(f'{k}:' + '\n' + ' '.join([f'[{i}] '+ str(x) for i, x in enumerate(v)]) + '\n')
     tab_data = [(k, v) for k, v in data.items() if not isinstance(v, list)]
     print(tabulate(tab_data, headers=headers))
