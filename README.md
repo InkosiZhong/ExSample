@@ -26,6 +26,7 @@ cd ExSample && pip install -e .
 <div align=center>
 <img src="https://s2.loli.net/2024/04/15/fj5uzFbMik3CacB.png" width="600px">
 </div>
+
 > Currently, this repository **only** provides routines for **offline query** using `.csv` annotation files.
 > If you want to query online with your object detection NN and tracking algorithms, please inherit class `BaseQuery` in `ExSample/query.py` and implement related functions.
 
