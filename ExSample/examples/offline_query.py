@@ -7,10 +7,10 @@ from ExSample.data import CSVDataset
 from ExSample.utils import show_result
 
 class OfflineQuery(BaseQuery):
-    def __init__(self, video_fp: str, csv_fp: str, query_objs: List[str], nb_chunks: int, discrim_use_union_find: bool):
+    def __init__(self, video_fp: str, csv_fp: str, query_objs: List[str], nb_chunks: int, discrim_use_union_find: bool, random_plus: bool):
         self.csv_fp = csv_fp
         self.query_objs = query_objs
-        super().__init__(video_fp, nb_chunks, discrim_use_union_find)
+        super().__init__(video_fp, nb_chunks, discrim_use_union_find, random_plus)
 
     def is_same_object(self, frame_id1: int, det1: Object, frame_id2: int, det2: Object) -> bool:
         '''
@@ -53,14 +53,16 @@ if __name__ == '__main__':
     parser.add_argument('--nb-chunks', '-n', type=int, default=16, help='number of the chunks, default is 16')
     parser.add_argument('--limit', '-l', type=int, required=True, help='number of the samples to find')
     parser.add_argument('--union-find', type=bool, default=True, help='whether to use union-find for discrimination, default is True')
+    parser.add_argument('--random-plus', type=bool, default=True, help='whether to use random+ within Chunk sampling, default is True')
     args = parser.parse_args()
     
     query = OfflineQuery(
             video_fp=args.video_path,
             csv_fp=args.csv_path,
             query_objs=args.query_objects,
+            nb_chunks=args.nb_chunks,
             discrim_use_union_find=args.union_find,
-            nb_chunks=args.nb_chunks
+            random_plus=args.random_plus,
         )
     ans, ans_frame_id, nb_samples = query.run(limit=args.limit)
     show_result(dict(frame_id=ans_frame_id, objects=ans, nb_find=len(ans), nb_samples=nb_samples), header='ExSample Offline Query')

@@ -24,7 +24,7 @@ cd ExSample && pip install -e .
 
 ## Experiments
 <div align=center>
-<img src="https://s2.loli.net/2024/04/15/fj5uzFbMik3CacB.png" width="600px">
+<img src="plot/plot.png" width="600px">
 </div>
 
 > Currently, this repository **only** provides routines for **offline query** using `.csv` annotation files.

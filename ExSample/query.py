@@ -7,7 +7,7 @@ from ExSample.data import VideoDataset
 from ExSample.chunk import Chunk
 
 class BaseQuery:
-    def __init__(self, video_fp: str, nb_chunks: int, discrim_use_union_find: bool=False):
+    def __init__(self, video_fp: str, nb_chunks: int, discrim_use_union_find: bool=False, random_plus: bool=True):
         self.vid = VideoDataset(video_fp, self.frame_transform_fn)
         self.discrim = Discriminator(self.is_same_object, use_union_find=discrim_use_union_find)
         self.detector = self.get_detector()
@@ -18,7 +18,7 @@ class BaseQuery:
             chunk_start = i * chunk_size
             if i == nb_chunks - 1:
                 chunk_size = self.vid_len - chunk_start
-            chunks.append(Chunk(chunk_start, chunk_size))
+            chunks.append(Chunk(chunk_start, chunk_size, random_plus))
         self.sampler = Sampler(chunks=chunks, alpha0=0.1, beta0=1)
         self.set_chunk_distribution()
 
