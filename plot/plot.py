@@ -19,7 +19,7 @@ fig, ax = plt.subplots()
 sns.lineplot(y='Instances Found', x='Frame Sampled', hue='Methods', data=data, ax=ax)
 ax.set_title('bicycle@Archie')
 max_ratio, ann_i = 0, 0
-for i, (y, x1, x2) in enumerate(zip(raw_data['Instances Found'], raw_data['random'], raw_data['1024'])):
+for i, (y, x1, x2) in enumerate(zip(raw_data['Instances Found'], raw_data['random'], raw_data['1024 (random+)'])):
     ratio = x1 / x2
     if ratio > max_ratio:
         max_ratio = ratio
