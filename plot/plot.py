@@ -24,12 +24,12 @@ for i, (y, x1, x2) in enumerate(zip(raw_data['Instances Found'], raw_data['rando
     if ratio > max_ratio:
         max_ratio = ratio
         ann_i = i
-ax.annotate('', xy=(raw_data['1024'][ann_i], raw_data['Instances Found'][ann_i]), 
+ax.annotate('', xy=(raw_data['1024 (random+)'][ann_i], raw_data['Instances Found'][ann_i]), 
             xytext=(raw_data['random'][ann_i], raw_data['Instances Found'][ann_i]), 
             arrowprops=dict(color='black', arrowstyle="<->"))
-ax.text((raw_data['1024'][ann_i] + raw_data['random'][ann_i]) / 2, 
+ax.text((raw_data['1024 (random+)'][ann_i] + raw_data['random'][ann_i]) / 2, 
     raw_data['Instances Found'][ann_i], 
     f'{max_ratio:.2f}x', horizontalalignment='center', verticalalignment='center',
     bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
 
-plt.savefig('src/plot.png', dpi=300, bbox_inches='tight')
+plt.savefig('plot/plot.png', dpi=300, bbox_inches='tight')
