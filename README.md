@@ -84,5 +84,8 @@ optional arguments:
   --union-find UNION_FIND
                         whether to use union-find for discrimination, default
                         is True
+  --random-plus RANDOM_PLUS
+                        whether to use random+ within Chunk sampling, default 
+                        is True
 
 ```
