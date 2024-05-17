@@ -15,7 +15,7 @@ class Sampler:
         vals = np.zeros(self.M)
         for j in range(self.M):
             alpha0, beta0 = self.base_param[j]
-            val = np.random.gamma(self.N1[j] + alpha0, 1 / (self.n[j] + beta0))
+            val = np.random.gamma(max(self.N1[j] + alpha0, 0), 1 / (self.n[j] + beta0))
             vals[j] = val
         order = np.argsort(vals)[::-1]
         for j_star in order:
